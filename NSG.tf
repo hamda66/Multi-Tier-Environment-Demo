@@ -8,14 +8,24 @@ resource "azurerm_network_security_group" "web_subnet_nsg" {
 
 // Web app NSG rules
 
+locals {
+  webb_ports ={
+ # key : value  
+  "100" : "80",
+ "110" : "443",
+  "120" : "8080",  
+}
+}
+
 resource "azurerm_network_security_rule" "web_subnet_nsg_rule" {
-  name                        = "web-subnet-nsg-rule"
+    for_each = local.webb_ports
+  name                        = "web-subnet-nsg-rule-${each.key}"
   priority                    = 100
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "*"
   source_port_range           = "*"
-  destination_port_range      = "80"
+  destination_port_range      = each.value
   source_address_prefix       = "*"
   destination_address_prefix  = azurerm_subnet.web_subnet.address_prefixes[0]
   resource_group_name         = azurerm_resource_group.rg.name
