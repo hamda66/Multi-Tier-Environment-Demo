@@ -42,7 +42,8 @@ resource "azurerm_lb_rule" "web_load_balancer_rule" {
  
 }
 
-/// Loaf balancer associated with the web subnet
+/// Load balancer associated with the web subnet
+/*
 resource "azurerm_network_interface_backend_address_pool_association" "web_subnet_association" {
   count = length(azurerm_network_interface.web_subnet_nic)
   network_interface_id = azurerm_network_interface.web_subnet_nic[count.index].id
@@ -50,3 +51,4 @@ resource "azurerm_network_interface_backend_address_pool_association" "web_subne
  
   backend_address_pool_id = azurerm_lb_backend_address_pool.web_load_balancer_backend.id
 }
+*/

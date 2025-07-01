@@ -17,3 +17,5 @@ app_sub_address = [ "10.2.0.0/24" ]
 
 db_sub_name = "Database-Subnet"
 db_sub_address = [ "10.3.0.0/24" ]
+
+admin_username = "Hamda"

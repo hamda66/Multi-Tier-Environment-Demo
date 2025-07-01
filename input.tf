@@ -51,3 +51,8 @@ variable "db_sub_address" {
   description = "Address prefixes for the db subnet"
   type = list(string)
 }
+
+variable "admin_username" {
+  description = "value for admin username"
+  type = string
+}
