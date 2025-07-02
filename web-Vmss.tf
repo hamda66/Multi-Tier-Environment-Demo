@@ -5,8 +5,10 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
    sku = "Standard_DS1_v2"
    instances = 1
     admin_username = var.admin_username
-    //Insert secret here 
-    admin_password = "P@ssw0rd1234!"
+    admin_ssh_key {
+        username   = var.admin_username
+        public_key = file("${path.module}/ssh_keys/id_rsa.pub")
+    }
 
     source_image_reference {
         publisher = "Canonical"
@@ -36,6 +38,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
       }
     }
 
-   ### script for web server ->> custom_data = 
+   ### script for web server. Custom data is used to run a script on the VM at creation time and only accepts base64 encoded data.
+   custom_data = filebase64("${path.module}/script/web-script.sh")
 
 }
