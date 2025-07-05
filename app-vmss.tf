@@ -1,5 +1,5 @@
-resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
-  name = "web-vmss"
+resource "azurerm_linux_virtual_machine_scale_set" "app_vmss" {
+  name = "app-vmss"
   location = var.location
   resource_group_name = azurerm_resource_group.rg.name
    sku = "Standard_DS1_v2"
@@ -7,7 +7,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
     admin_username = var.admin_username
     admin_ssh_key {
         username   = var.admin_username
-        public_key = file("${path.module}/ssh_keys/id_rsa.pub")
+        public_key = file("${path.module}/keys/myproject.pub")
     }
 
     source_image_reference {
@@ -25,11 +25,11 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
     disable_password_authentication = true
 
     network_interface {
-      name = "webb-vmss-nic"
+      name = "app-vmss-nic"
        ip_configuration {
         name                          = "ipconfig1"
         primary                       = true
-        subnet_id                     = azurerm_subnet.web_subnet.id
+        subnet_id                     = azurerm_subnet.app_subnet.id
 
         ##Add web vmms NSG assiociation id here
 
@@ -39,6 +39,6 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
     }
 
    ### script for web server. Custom data is used to run a script on the VM at creation time and only accepts base64 encoded data.
-   custom_data = filebase64("${path.module}/script/web-script.sh")
+   custom_data = filebase64("${path.module}/script/app-script.sh")
 
 }

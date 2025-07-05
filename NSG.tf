@@ -39,3 +39,9 @@ resource "azurerm_subnet_network_security_group_association" "web_subnet_nsg_ass
 }
 
 // App subnet NSG
+
+resource "azurerm_network_security_group" "app_nsg" {
+  name                = "${var.app_sub_name}-nsg"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+}
