@@ -1,5 +1,5 @@
-resource "azurerm_mysql_server" "MYdatabase" {
-  name                = "mydatabase-server"
+resource "azurerm_mysql_server" "Sql_server" {
+  name                = "SQL-server"
   location = var.location
   resource_group_name = azurerm_resource_group.rg.name
   version             = "8.0"
@@ -23,4 +23,11 @@ resource "azurerm_mysql_server" "MYdatabase" {
     environment = "Production"
     project     = "MyProject"
   }
+}
+
+resource "azurerm_mysql_database" "SQL_database" {
+  name = "SQL-database"
+  Location = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+  Server_id = azurerm_mysql_server.Sql_server.Server_id
 }
