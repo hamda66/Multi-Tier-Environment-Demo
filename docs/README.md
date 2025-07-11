@@ -37,7 +37,7 @@ To set up and run this project, ensure you have the following:
 2. Navigate to the project directory:  
    `cd 3-tier-app-project`
 
-3. Install dependencies for each tier as described in their respective README files.
+3. Install dependencies for each tier 
 
 4. Configure environment variables as needed.
 
