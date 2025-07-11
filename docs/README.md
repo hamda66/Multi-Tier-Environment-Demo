@@ -41,5 +41,5 @@ To set up and run this project, ensure you have the following:
 
 4. Configure environment variables as needed.
 
-5. Start the application using Docker Compose or the provided scripts.
+
 
