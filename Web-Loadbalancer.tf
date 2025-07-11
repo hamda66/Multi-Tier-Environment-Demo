@@ -20,14 +20,15 @@ resource "azurerm_lb_probe" "web_load_balancer_probe" {
   loadbalancer_id = azurerm_lb.web_load_balancer.id
     protocol = "Tcp"
     port = 80
+    // path = "/"    <--- Uncomment if using HTTP/S probes. Make it match your web server's health check endpoint. Make to path match your web server's index page or health check endpoint.
+    //body = "Username: admin, Password: P@ssw0rd1234"  <--- Uncomment if you want to send a specific body in the probe request.
    // resource_group_name = azurerm_resource_group.rg.name
 }
 
 resource "azurerm_lb_backend_address_pool" "web_load_balancer_backend" {
   name                = "webapp-backend-pool"
   loadbalancer_id     = azurerm_lb.web_load_balancer.id
-  //resource_group_name = azurerm_resource_group.rg.name
-  
+  virtual_network_id = var.Vnet.MainVnet.id
 }
 
 resource "azurerm_lb_rule" "web_load_balancer_rule" {

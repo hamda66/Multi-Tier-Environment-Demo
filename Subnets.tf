@@ -13,6 +13,7 @@ resource "azurerm_subnet" "app_subnet" {
     resource_group_name = azurerm_resource_group.rg.name
     virtual_network_name = azurerm_virtual_network.MainVnet.name
     address_prefixes = var.app_sub_address
+    service_endpoints = [ "Microsoft.Sql" ] //Enabled service endpoint for SQL Database to allow secure access from the app subnet
   
 }
 

@@ -41,4 +41,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_vmss" {
    ### script for web server. Custom data is used to run a script on the VM at creation time and only accepts base64 encoded data.
    custom_data = filebase64("${path.module}/script/web-script.sh")
 
+
+    // must be added to ensure the VMSS is created after the database and database network rule to ensure the VMSS can connect to the database  
+   depends_on = [ azurerm_mysql_database.SQL_database, azurerm_virtual_network_rule.my_sql_vnet_rule ]
+
 }

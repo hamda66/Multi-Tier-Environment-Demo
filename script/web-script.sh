@@ -6,6 +6,8 @@
 sudo apt-get update
 sudo install apache2 -y
 
+sudo install mysql
+
 # Start Apache service and enable it to start on boot
 sudo systemctl start apache2    
 sudo systemctl enable apache2
